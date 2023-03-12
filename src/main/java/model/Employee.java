@@ -16,7 +16,7 @@ public class Employee {
     private String gender;
     @Column(name = "age")
     private Integer age;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinColumn(name = "city_id")
     private City city;
 
@@ -62,17 +62,5 @@ public class Employee {
 
     public void setCity(City city) {
         this.city = city;
-    }
-
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", gender='" + gender + '\'' +
-                ", age=" + age +
-                ", city=" + city +
-                '}';
     }
 }

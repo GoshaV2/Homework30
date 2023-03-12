@@ -5,10 +5,10 @@ import model.Employee;
 import java.util.List;
 import java.util.Optional;
 
-public interface EmployeeDAO {
-    Employee insert(Employee employee);
+public interface EmployeeDao {
+    void insert(Employee employee);
 
-    Employee update(Employee employee);
+    void update(Employee employee);
 
     Optional<Employee> findById(long id);
 
