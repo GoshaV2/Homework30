@@ -9,6 +9,7 @@ import org.hibernate.cfg.Configuration;
 
 import javax.persistence.EntityManager;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 public class HibernateManager {
     private SessionFactory sessionFactory;
@@ -32,6 +33,15 @@ public class HibernateManager {
             session.beginTransaction();
             consumer.accept(session);
             session.getTransaction().commit();
+        }
+    }
+
+    public <T> T withEntityManager(Function<EntityManager,T> function) {
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            T result= function.apply(session);
+            session.getTransaction().commit();
+            return result;
         }
     }
 }
